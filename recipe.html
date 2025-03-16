@@ -1,0 +1,121 @@
+{% extends "scoop/layout.html" %}
+
+{% block body %}
+    <style>
+        .recipe-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 800px;
+            margin: 20px auto; /* Center the container */
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-family: sans-serif;
+        }
+
+        .recipe-container h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .recipe-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .recipe-container p {
+            margin: 8px 0;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .comment-section {
+            width: 100%;
+            margin-top: 20px;
+            text-align: center; /* Center comment section items */
+        }
+
+        .comment-section form {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center form elements */
+            margin-bottom: 20px;
+        }
+
+        .comment-section label {
+            margin-bottom: 5px;
+        }
+
+        .comment-section input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .comment-section button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .comment-section .comments {
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        .comment-section .comments p {
+            text-align: left; /* Align comments to the left */
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+    </style>
+
+<div class="recipe-container">
+    <h1>{{ name }}</h1>
+    <img src="{{ image }}" alt="{{ name }}">
+    <p>{{ description }}</p>
+    <p><strong>Ingredients:</strong> {{ ingredients }}</p>
+    <p><strong>Effect:</strong>  {{ time_effect }}</p>
+    <p><strong>Duration:</strong> {{ duration }}</p>
+    <p><strong>Secondary effects:</strong>  {{ effects }}</p>
+
+    <div class="comment-section">
+        <form method="POST">
+            {% csrf_token %}
+            <label for="comment">Type a comment:</label>
+            <input type="text" name="comment" id="comment">
+            <button type="submit">Add Comment</button>
+        </form>
+
+        <div class="comments">
+            <h2>Comments</h2>
+            {% for comment in comments %}
+                <p><strong>{{ comment.user.username }}:</strong> {{ comment.content }}</p>
+            {% endfor %}
+        </div>
+
+        {% if is_saved %}
+            <p>This recipe is saved to your list!</p>
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" name="save">Unsave Recipe</button>
+            </form>
+        {% else %}
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" name="save">Save Recipe</button>
+            </form>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

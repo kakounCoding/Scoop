@@ -1,0 +1,78 @@
+{% extends 'scoop/layout.html' %}
+
+{% load static %}
+
+{% block body %}
+    <style>
+        .sick-page-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            padding: 20px;
+            font-family: sans-serif;
+        }
+
+        .text-content {
+            flex: 1;
+            text-align: left;
+            padding-right: 30px; /* Increased padding */
+        }
+
+        .text-content h1 {
+            font-size: 3.5em; /* Increased font size */
+            margin-bottom: 15px; /* Increased margin */
+            color: #333;
+        }
+
+        .text-content h3 {
+            font-size: 1.5em; /* Increased font size */
+            margin-bottom: 25px; /* Increased margin */
+            color: #666;
+            max-width: 700px; /* Increased max width */
+            line-height: 1.8; /* Increased line height */
+        }
+
+        .image-container {
+            flex: 1;
+            text-align: right;
+        }
+
+        .image-container img {
+            max-width: 100%; /* Increased image size */
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .sick-page-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .text-content {
+                text-align: center;
+                padding-right: 0;
+            }
+
+            .image-container {
+                text-align: center;
+                margin-top: 30px; /* Increased margin on small screens */
+            }
+
+            .image-container img {
+                max-width: 95%; /* Slightly larger on small screens */
+            }
+        }
+    </style>
+
+    <div class="sick-page-container">
+        <div class="text-content">
+            <h1 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-style: italic;">The perfect solution to miss your classes</h1>
+            <h3>Find recipes that will get you sick, so you don't have to go to school anymore. <strong style="color: blue; font-style: italic;">And your parents will be okay with it</strong></h3>
+        </div>
+        <div class="image-container">
+            <img src="{% static 'scoop/src/sick.png' %}" alt="img">
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "scoop/layout.html" %}
+{% block body %}
+
+    <form action="{% url 'create' %}" method="POST">
+        {% csrf_token %}
+
+        <label for="name">Enter username:</label>
+        <input type="text" name="name" placeholder="name">
+
+        <label for="description">Enter description:</label>
+        <input type="text" name="description" placeholder="description">
+
+        <label for="time_effect">Enter the time that takes for the effects to appear:</label>
+        <input type="number" name="time_effect" placeholder="time_effect">
+
+        <label for="duration">Enter how long the effects last:</label>
+        <input type="number" name="duration" placeholder="duration">
+
+        <label for="ingredients">Enter what you need:</label>
+        <input type="text" name="ingredients" placeholder="ingredients">
+
+        <label for="secondary_effects">Enter what can it cause as secondary effects:</label>
+        <input type="text" name="secondary_effects" placeholder="secondary_effects">
+
+        <label for="image">Picture:</label>
+        <input type="text" name="image" placeholder="image">
+
+        <input type="submit">
+    </form>
+{% endblock %}

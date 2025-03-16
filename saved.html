@@ -1,0 +1,93 @@
+{% extends "scoop/layout.html" %}
+
+{% block body %}
+    <style>
+        .saved-recipes-container {
+            font-family: 'Arial', sans-serif;
+            padding: 30px;
+            max-width: 900px;
+            margin: 30px auto;
+            background-color: #CBDCEB;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .saved-recipes-container h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2c3e50;
+            font-size: 2.5em;
+            font-weight: 600;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 15px;
+        }
+
+        .saved {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .saved a {
+            display: block;
+            text-decoration: none;
+            color: #3498db;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .saved a:hover {
+            color: #2980b9;
+        }
+
+        .saved img {
+            width: 100%;
+            height: 250px; /* Fixed height for consistent image display */
+            object-fit: cover; /* Maintain aspect ratio and cover container */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .saved img:hover {
+            transform: scale(1.03); /* Slight zoom on hover */
+        }
+
+        .saved div {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .saved div:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .saved {
+                grid-template-columns: 1fr;
+            }
+
+            .saved img {
+                height: auto; /* Adjust height for smaller screens */
+            }
+        }
+    </style>
+
+    <div class="saved-recipes-container">
+        <h1>My Saved Recipes</h1>
+        <div class="saved">
+            {% for save in saves %}
+                <div>
+                    <img src="{{ save.recipe.image }}" alt="{{ save.recipe.name }}">
+                    <a href="{% url 'recipe' save.recipe.id %}">{{ save.recipe.name }}</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

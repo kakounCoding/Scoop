@@ -1,0 +1,88 @@
+{% extends "scoop/layout.html" %}
+
+{% block body %}
+    <style>
+/* ... (your existing CSS) ... */
+
+        h1 {
+            text-align: center;
+        }
+
+        .recipes {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 columns */
+            gap: 20px; /* Space between grid items */
+        }
+
+        .recipe {
+            background-color: #fff;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+
+        }
+
+        .recipe:hover {
+            transform: translateY(-5px); /* Slightly move card up on hover */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+        }
+
+        .recipe img {
+            max-width: auto;
+            height: 200px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .recipe h3 {
+            margin-top: 0;
+            font-size: 1.2em; /* Slightly larger title */
+            margin-bottom: 10px;
+        }
+
+        .recipe .desc {
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.5; /* Improve line spacing */
+        }
+
+        .recipe .info {
+            color: #777;
+            margin-bottom: 8px;
+            font-size: 0.9em; /* Slightly smaller info text */
+        }
+
+        .recipe .enter-link {
+            background-color: #007bff; /* Blue button */
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block; /* Make it a block-level element */
+            transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+        }
+        .recipe .enter-link {
+            /* ... (your existing button styles) ... */
+            display: block; /* Make it a block-level element */
+            text-align: center; /* Center the text */
+            margin: 10px auto 0; /* Center the button horizontally */
+        }
+        .recipe .enter-link:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+    <h1>Dashboard</h1>
+    <form id="filter-form">
+        <label for="time_effect">Filter by Time Effect</label>
+        <input type="number" name="time_effect" id="time_effect">
+    
+        <label for="duration">Filter by Duration</label>
+        <input type="number" name="duration" id="duration">
+    
+        <button type="button" id="submit">Apply Filters</button>
+    </form>
+    <div class="recipes"></div>
+{% endblock %}
